@@ -22,12 +22,19 @@
     -> Some rooms may contain special messages, that only appear when a user checks the room.
 
 */
+#include <fstream.h>
 #include <iostream>
 #include <ctype.h>
-// #include "movement.h"
-// #include "look.h"
-// #include "goal.h"
-#include ""
+#include <ncurses.h>
+using namespace std;
+class space{
+    int floor, col, row;
+    int space_val;
+    char space_name[10];
+    bool objective;
+    int objective_no;
+};
+space grid[4][7][9];
 int main() {
 
     return 0;
