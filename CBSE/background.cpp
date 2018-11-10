@@ -1,5 +1,6 @@
-#include <fstream>
 #include <iostream>
+#include <string.h>
+#include <fstream>
 #include "create.h"
 using namespace std;
 int main() {

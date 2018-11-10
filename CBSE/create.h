@@ -1,4 +1,3 @@
-#include <string.h>
 using namespace std;
 class space{
     int pos[3]; 
@@ -34,5 +33,69 @@ class space{
     void putSpaceVal() {
         cout<<pos[0]<<" "<<pos[1]<<" "<<pos[2]<<" "<<posval<<" "<<room_name<<endl;
     }
-
-} temp;
+    int returnLevel() {
+        return pos[0];
+    }
+    int returnRow() {
+        return pos[1];
+    }
+    int returnCol() {
+        return pos[2];
+    }
+    int returnPosVal() {
+        return posval;
+    }
+    void setPosVal(int z) {
+        posval = z;
+    }
+} temp, grid[7][10];
+class character {
+    int pos[3];
+    int type;
+    public:
+    character(int a, int b, int c, int d) {
+        pos[0] = a;
+        pos[1] = b;
+        pos[2] = c;
+        type = d;
+    }
+    // 1 = user
+    // 2 = senior
+    // 3 = teacher 
+};
+void intro(int x, int y) {
+    char *intro[] = {
+        "ARCADIA",
+        "Game created and designed by Lael John",
+        "To move, use the arrow keys",
+        "To check the room, press <space>",
+        "To check your surroundings, press c",
+        "Good Luck!"
+    };
+    for(int i = 0; i < 6; i++) {
+        mvprintw(x/2, (y- strlen(intro[i]))/2, "%s", intro[i]);
+        refresh();
+        getch();
+        clear();
+    }
+}
+void loadlevel(int x) {
+    ifstream fin;
+    fin.open("layout.dat", ios::in | ios::binary);
+    if(fin) {
+    fin.read((char *)&temp, sizeof(temp));
+        while(!fin.eof()) {
+            if(temp.returnLevel() == x) {
+                int row, col, pos;
+                row = temp.returnRow();
+                col = temp.returnCol();
+                pos = temp.returnPosVal();
+                grid[row][col].setPosVal(pos);
+            }
+            fin.read((char *)&temp, sizeof(temp));
+        }
+    fin.close();
+    } else {
+        cout<<"Unable to open file;";
+    }
+}

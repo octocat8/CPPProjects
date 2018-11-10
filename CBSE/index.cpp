@@ -20,12 +20,21 @@
     ->  Some Subject rooms may be unavailable at certain times owing to usage by seniors for illicit activities
     -> Some rooms may contain special messages, that only appear when a user checks the room.
 */
-#include <fstream>
 #include <iostream>
+#include <string.h>
+#include <fstream>
 #include <ncurses.h>
 #include "create.h"
 using namespace std;
-int main() {
 
+int main() {
+    int row, col;
+    loadlevel(2);
+    character user(0,0,0,1);
+    initscr();
+    getmaxyx(stdscr, row, col);
+    intro(row, col);
+    
+    endwin();
     return 0;
 }
