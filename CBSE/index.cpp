@@ -26,15 +26,67 @@
 #include <ncurses.h>
 #include "create.h"
 using namespace std;
-
+int row, col;
+character user(0,0,0,1);
+void loadScreen() {
+    for(int i = 0; i < 7; i++){
+        for(int j = 0; j < 10; j++) {
+            if(user.returnRow() == i && user.returnCol() == j) {
+                mvprintw(5 + i, 5+ (3*j), "|X|");
+            } else {
+                mvprintw(5 + i, 5+ (3*j), "| |");
+            }
+        }
+    }
+}
 int main() {
-    int row, col;
+    int ch;
     loadlevel(2);
-    character user(0,0,0,1);
     initscr();
+    cbreak();
+    keypad(stdscr, true);
     getmaxyx(stdscr, row, col);
-    intro(row, col);
-    
+    // intro(row, col);
+    // loadScreen();
+    // do {
+    //     ch = getch();
+    //     if(ch == KEY_LEFT) {
+    //         clear();
+    //         user.moveLeft();
+    //         loadScreen();
+    //         mvprintw(row-2, 0, "MOVE LEFT");
+    //         refresh();
+    //     } else if (ch == KEY_RIGHT) {
+    //         clear();
+    //         user.moveRight();
+    //         loadScreen();
+    //         mvprintw(row-2, 0, "MOVE RIGHT");
+    //         refresh();
+    //     } else if (ch == KEY_UP) {
+    //         clear();
+    //         user.moveUp();
+    //         loadScreen();
+    //         mvprintw(row-2, 0, "MOVE UP");
+    //         refresh();
+    //     } else if(ch == KEY_DOWN) {
+    //         clear();
+    //         user.moveDown();
+    //         loadScreen();
+    //         mvprintw(row-2, 0, "MOVE DOWN");
+    //         refresh();
+    //     } else if(ch == ' ') {
+    //         clear();
+    //         user.checkRoom(row, col);
+    //         loadScreen();
+    //         mvprintw(row-6, 0, "CHECK CURRENT ROOM");
+    //         refresh();
+    //     }
+    //     refresh();
+    // } while (ch != 'x');
+    // clear();
+    printw(grid[0][0].returnRoomVal());
+    refresh();
+    getch();
     endwin();
     return 0;
 }

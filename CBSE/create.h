@@ -45,6 +45,9 @@ class space{
     int returnPosVal() {
         return posval;
     }
+    char const* returnRoomVal() {
+        return room_name;
+    }
     void setPosVal(int z) {
         posval = z;
     }
@@ -52,6 +55,8 @@ class space{
 class character {
     int pos[3];
     int type;
+    char room_current[20];
+    char room_next[20];
     public:
     character(int a, int b, int c, int d) {
         pos[0] = a;
@@ -59,20 +64,48 @@ class character {
         pos[2] = c;
         type = d;
     }
-    // 1 = user
-    // 2 = senior
-    // 3 = teacher 
+    int returnRow() { return pos[1]; }
+    int returnCol() { return pos[2]; }
+    void moveLeft() {
+        strncpy(room_current, grid[pos[1]][pos[2]].returnRoomVal(), 20);
+        strncpy(room_next, grid[pos[1]][pos[2]-1].returnRoomVal(), 20);
+        if(pos[2] > 0 && grid[pos[1]][pos[2] - 1].returnPosVal() != 0 && strcmp(room_current, room_next) == 0)  
+            pos[2]--; 
+    }
+    void moveRight() {
+        strncpy(room_current, grid[pos[1]][pos[2]].returnRoomVal(), 20);
+        strncpy(room_next, grid[pos[1]][pos[2]+1].returnRoomVal(), 20);
+        if(pos[2] < 9 && grid[pos[1]][pos[2] + 1].returnPosVal() != 0 && strcmp(room_current, room_next) == 0)  
+        pos[2]++; 
+    }
+    void moveUp() {
+        strncpy(room_current, grid[pos[1]][pos[2]].returnRoomVal(), 20);
+        strncpy(room_next, grid[pos[1]-1][pos[2]].returnRoomVal(), 20);
+        if(pos[1] > 0 && grid[pos[1]-1][pos[2]].returnPosVal() != 0 && strcmp(room_current, room_next) == 0)  
+        pos[1]--; 
+    }
+    void moveDown() {
+        strncpy(room_current, grid[pos[1]][pos[2]].returnRoomVal(), 20);
+        strncpy(room_next, grid[pos[1]+1][pos[2]].returnRoomVal(), 20);
+        if(pos[1] < 6 && grid[pos[1]+1][pos[2]].returnPosVal() != 0 && strcmp(room_current, room_next) == 0)  
+            pos[1]++; 
+    }
+    void checkRoom(int x, int y) {
+        mvprintw(x - 4, 0, "You are located at ( %i , %i )\n\nThe space you are currently in is %c", pos[1], pos[2], room_current);
+    }
 };
 void intro(int x, int y) {
-    char *intro[] = {
+    char const *intro[] = {
         "ARCADIA",
         "Game created and designed by Lael John",
         "To move, use the arrow keys",
         "To check the room, press <space>",
         "To check your surroundings, press c",
+        "To exit, press x",
+        "On the screen, . represents your current position",
         "Good Luck!"
     };
-    for(int i = 0; i < 6; i++) {
+    for(int i = 0; i < 7; i++) {
         mvprintw(x/2, (y- strlen(intro[i]))/2, "%s", intro[i]);
         refresh();
         getch();
