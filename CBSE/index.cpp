@@ -11,7 +11,6 @@
     Files that I might need to create:
     -> alter.h changes how the school looks and behaves as a student grows up
     -> ncurses.h allows for graphical user interfaces
-
     Rules: 
     You cannot move to spaces marked 0 
     -> The objectives or goals may be spread all over the school
@@ -20,21 +19,12 @@
     -> As you get older, your seniors will affect your speed less, but teachers will move at a faster pace
     ->  Some Subject rooms may be unavailable at certain times owing to usage by seniors for illicit activities
     -> Some rooms may contain special messages, that only appear when a user checks the room.
-
 */
-#include <fstream.h>
+#include <fstream>
 #include <iostream>
-#include <ctype.h>
 #include <ncurses.h>
+#include "create.h"
 using namespace std;
-class space{
-    int floor, col, row;
-    int space_val;
-    char space_name[10];
-    bool objective;
-    int objective_no;
-};
-space grid[4][7][9];
 int main() {
 
     return 0;
