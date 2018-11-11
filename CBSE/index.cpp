@@ -61,6 +61,16 @@ int main() {
             user.moveDown(col, row);
             loadScreen(user.returnCol(), user.returnRow());
             refresh();
+        } else if(ch == 'u') {
+            clear();
+            user.stairUp(user.returnCol(), user.returnRow());
+            loadScreen(user.returnCol(), user.returnRow());
+            refresh();
+        } else if(ch == 'd') {
+            clear();
+            user.stairDown(user.returnCol(), user.returnRow());
+            loadScreen(user.returnCol(), user.returnRow());
+            refresh();
         } else if(ch == ' ') {
             clear();
             user.checkRoom(row);
