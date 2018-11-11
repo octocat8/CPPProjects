@@ -25,64 +25,53 @@
 #include <fstream>
 #include <ncurses.h>
 #include "create.h"
+#include "look.h"
+#include "move.h"
 using namespace std;
 int row, col;
-character user(0,0,0,1);
-void loadScreen() {
-    for(int i = 0; i < 7; i++){
-        for(int j = 0; j < 10; j++) {
-            if(user.returnRow() == i && user.returnCol() == j) {
-                mvprintw(5 + i, 5+ (3*j), " ^ ");
-            } else if(grid[i][j].returnPosVal() == 0){
-                mvprintw(5 + i, 5+ (3*j), "|X|");
-            } else if(grid[i][j].returnPosVal() == 1){
-                mvprintw(5 + i, 5+ (3*j), "   ");
-            } else {
-                mvprintw(5 + i, 5+ (3*j), "|O|");
-            }
-        }
-    }
-}
 int main() {
-    int ch;
     loadlevel(2);
+    character user(0,0,0,1);
+    int ch;
     initscr();
     cbreak();
     keypad(stdscr, true);
     getmaxyx(stdscr, row, col);
     intro(row, col);
-    loadScreen();
+    loadScreen(user.returnCol(), user.returnRow());
     do {
         ch = getch();
         if(ch == KEY_LEFT) {
             clear();
-            user.moveLeft();
-            loadScreen();
-            mvprintw(row-2, 0, "MOVE LEFT");
+            user.moveLeft(col,row);
+            loadScreen(user.returnCol(), user.returnRow());
             refresh();
         } else if (ch == KEY_RIGHT) {
             clear();
-            user.moveRight();
-            loadScreen();
-            mvprintw(row-2, 0, "MOVE RIGHT");
+            user.moveRight(col,row);
+            loadScreen(user.returnCol(), user.returnRow());
             refresh();
         } else if (ch == KEY_UP) {
             clear();
-            user.moveUp();
-            loadScreen();
-            mvprintw(row-2, 0, "MOVE UP");
+            user.moveUp(col,row);
+            loadScreen(user.returnCol(), user.returnRow());
             refresh();
         } else if(ch == KEY_DOWN) {
             clear();
-            user.moveDown();
-            loadScreen();
-            mvprintw(row-2, 0, "MOVE DOWN");
+            user.moveDown(col, row);
+            loadScreen(user.returnCol(), user.returnRow());
             refresh();
         } else if(ch == ' ') {
             clear();
             user.checkRoom(row, col);
-            loadScreen();
+            loadScreen(user.returnCol(), user.returnRow());
             mvprintw(row-6, 0, "CHECK CURRENT ROOM");
+            refresh();
+        } else if(ch == 'c') {
+            clear();
+            user.checkSurroundings(row, col);
+            loadScreen(user.returnCol(), user.returnRow());
+            mvprintw(row-2, 0, "CHECK SURROUNDING ROOMS");
             refresh();
         }
         refresh();

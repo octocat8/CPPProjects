@@ -42,7 +42,7 @@ class space{
     int returnCol() {
         return pos[2];
     }
-    int returnPosVal() {
+    int returnSpaceVal() {
         return posval;
     }
     char const* returnRoomVal() {
@@ -66,35 +66,20 @@ class character {
         pos[1] = b;
         pos[2] = c;
         type = d;
+        strncpy(room_current, grid[b][c].returnRoomVal(), 20);
     }
     int returnRow() { return pos[1]; }
     int returnCol() { return pos[2]; }
-    void moveLeft() {
-        strncpy(room_current, grid[pos[1]][pos[2]].returnRoomVal(), 20);
-        strncpy(room_next, grid[pos[1]][pos[2]-1].returnRoomVal(), 20);
-        if(pos[2] > 0 && grid[pos[1]][pos[2] - 1].returnPosVal() != 0)  
-            pos[2]--; 
-    }
-    void moveRight() {
-        strncpy(room_current, grid[pos[1]][pos[2]].returnRoomVal(), 20);
-        strncpy(room_next, grid[pos[1]][pos[2]+1].returnRoomVal(), 20);
-        if(pos[2] < 9 && grid[pos[1]][pos[2] + 1].returnPosVal() != 0)  
-        pos[2]++; 
-    }
-    void moveUp() {
-        strncpy(room_current, grid[pos[1]][pos[2]].returnRoomVal(), 20);
-        strncpy(room_next, grid[pos[1]-1][pos[2]].returnRoomVal(), 20);
-        if(pos[1] > 0 && grid[pos[1]-1][pos[2]].returnPosVal() != 0)  
-        pos[1]--; 
-    }
-    void moveDown() {
-        strncpy(room_current, grid[pos[1]][pos[2]].returnRoomVal(), 20);
-        strncpy(room_next, grid[pos[1]+1][pos[2]].returnRoomVal(), 20);
-        if(pos[1] < 6 && grid[pos[1]+1][pos[2]].returnPosVal() != 0)  
-            pos[1]++; 
-    }
-    void checkRoom(int x, int y) {
-        mvprintw(x - 4, 0, "You are located at ( %i , %i )\n\nThe space you are currently in is %c", pos[1], pos[2], room_current);
+    void moveLeft(int x, int y);
+    void moveRight(int x, int y);
+    void moveUp(int x, int y);
+    void moveDown(int x, int y);
+    void checkRoom(int x, int y);
+    void checkSurroundings(int x, int y);
+    void setLocation(int x, int y, int z) {
+        pos[0] = x;
+        pos[1] = y;
+        pos[2] = z;
     }
 };
 void intro(int x, int y) {
@@ -125,7 +110,7 @@ void loadlevel(int x) {
                 int row, col, pos;
                 row = temp.returnRow();
                 col = temp.returnCol();
-                pos = temp.returnPosVal();
+                pos = temp.returnSpaceVal();
                 grid[row][col].setPosVal(pos);
                 grid[row][col].setRoomVal(temp.returnRoomVal());
             }
@@ -134,5 +119,20 @@ void loadlevel(int x) {
     fin.close();
     } else {
         cout<<"Unable to open file;";
+    }
+}
+void loadScreen(int x, int y) {
+    for(int i = 0; i < 7; i++){
+        for(int j = 0; j < 10; j++) {
+            if(y == i && x == j) {
+                mvprintw(5 + i, 5+ (3*j), " ^ ");
+            } else if(grid[i][j].returnSpaceVal() == 0){
+                mvprintw(5 + i, 5+ (3*j), "|X|");
+            } else if(grid[i][j].returnSpaceVal() == 1){
+                mvprintw(5 + i, 5+ (3*j), "   ");
+            } else {
+                mvprintw(5 + i, 5+ (3*j), "|O|");
+            }
+        }
     }
 }
