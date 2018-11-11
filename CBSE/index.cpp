@@ -63,13 +63,13 @@ int main() {
             refresh();
         } else if(ch == ' ') {
             clear();
-            user.checkRoom(row, col);
+            user.checkRoom(row);
             loadScreen(user.returnCol(), user.returnRow());
             mvprintw(row-6, 0, "CHECK CURRENT ROOM");
             refresh();
         } else if(ch == 'c') {
             clear();
-            user.checkSurroundings(row, col);
+            user.checkSurroundings(row);
             loadScreen(user.returnCol(), user.returnRow());
             mvprintw(row-2, 0, "CHECK SURROUNDING ROOMS");
             refresh();

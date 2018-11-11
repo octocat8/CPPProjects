@@ -74,8 +74,8 @@ class character {
     void moveRight(int x, int y);
     void moveUp(int x, int y);
     void moveDown(int x, int y);
-    void checkRoom(int x, int y);
-    void checkSurroundings(int x, int y);
+    void checkRoom(int x);
+    void checkSurroundings(int x);
     void setLocation(int x, int y, int z) {
         pos[0] = x;
         pos[1] = y;
