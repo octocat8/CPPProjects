@@ -32,9 +32,13 @@ void loadScreen() {
     for(int i = 0; i < 7; i++){
         for(int j = 0; j < 10; j++) {
             if(user.returnRow() == i && user.returnCol() == j) {
+                mvprintw(5 + i, 5+ (3*j), " ^ ");
+            } else if(grid[i][j].returnPosVal() == 0){
                 mvprintw(5 + i, 5+ (3*j), "|X|");
+            } else if(grid[i][j].returnPosVal() == 1){
+                mvprintw(5 + i, 5+ (3*j), "   ");
             } else {
-                mvprintw(5 + i, 5+ (3*j), "| |");
+                mvprintw(5 + i, 5+ (3*j), "|O|");
             }
         }
     }
@@ -46,47 +50,43 @@ int main() {
     cbreak();
     keypad(stdscr, true);
     getmaxyx(stdscr, row, col);
-    // intro(row, col);
-    // loadScreen();
-    // do {
-    //     ch = getch();
-    //     if(ch == KEY_LEFT) {
-    //         clear();
-    //         user.moveLeft();
-    //         loadScreen();
-    //         mvprintw(row-2, 0, "MOVE LEFT");
-    //         refresh();
-    //     } else if (ch == KEY_RIGHT) {
-    //         clear();
-    //         user.moveRight();
-    //         loadScreen();
-    //         mvprintw(row-2, 0, "MOVE RIGHT");
-    //         refresh();
-    //     } else if (ch == KEY_UP) {
-    //         clear();
-    //         user.moveUp();
-    //         loadScreen();
-    //         mvprintw(row-2, 0, "MOVE UP");
-    //         refresh();
-    //     } else if(ch == KEY_DOWN) {
-    //         clear();
-    //         user.moveDown();
-    //         loadScreen();
-    //         mvprintw(row-2, 0, "MOVE DOWN");
-    //         refresh();
-    //     } else if(ch == ' ') {
-    //         clear();
-    //         user.checkRoom(row, col);
-    //         loadScreen();
-    //         mvprintw(row-6, 0, "CHECK CURRENT ROOM");
-    //         refresh();
-    //     }
-    //     refresh();
-    // } while (ch != 'x');
-    // clear();
-    printw(grid[0][0].returnRoomVal());
-    refresh();
-    getch();
+    intro(row, col);
+    loadScreen();
+    do {
+        ch = getch();
+        if(ch == KEY_LEFT) {
+            clear();
+            user.moveLeft();
+            loadScreen();
+            mvprintw(row-2, 0, "MOVE LEFT");
+            refresh();
+        } else if (ch == KEY_RIGHT) {
+            clear();
+            user.moveRight();
+            loadScreen();
+            mvprintw(row-2, 0, "MOVE RIGHT");
+            refresh();
+        } else if (ch == KEY_UP) {
+            clear();
+            user.moveUp();
+            loadScreen();
+            mvprintw(row-2, 0, "MOVE UP");
+            refresh();
+        } else if(ch == KEY_DOWN) {
+            clear();
+            user.moveDown();
+            loadScreen();
+            mvprintw(row-2, 0, "MOVE DOWN");
+            refresh();
+        } else if(ch == ' ') {
+            clear();
+            user.checkRoom(row, col);
+            loadScreen();
+            mvprintw(row-6, 0, "CHECK CURRENT ROOM");
+            refresh();
+        }
+        refresh();
+    } while (ch != 'x');
     endwin();
     return 0;
 }

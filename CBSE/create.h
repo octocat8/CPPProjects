@@ -51,6 +51,9 @@ class space{
     void setPosVal(int z) {
         posval = z;
     }
+    void setRoomVal( char const* z) {
+        strncpy(room_name, z, 20);
+    }
 } temp, grid[7][10];
 class character {
     int pos[3];
@@ -69,25 +72,25 @@ class character {
     void moveLeft() {
         strncpy(room_current, grid[pos[1]][pos[2]].returnRoomVal(), 20);
         strncpy(room_next, grid[pos[1]][pos[2]-1].returnRoomVal(), 20);
-        if(pos[2] > 0 && grid[pos[1]][pos[2] - 1].returnPosVal() != 0 && strcmp(room_current, room_next) == 0)  
+        if(pos[2] > 0 && grid[pos[1]][pos[2] - 1].returnPosVal() != 0)  
             pos[2]--; 
     }
     void moveRight() {
         strncpy(room_current, grid[pos[1]][pos[2]].returnRoomVal(), 20);
         strncpy(room_next, grid[pos[1]][pos[2]+1].returnRoomVal(), 20);
-        if(pos[2] < 9 && grid[pos[1]][pos[2] + 1].returnPosVal() != 0 && strcmp(room_current, room_next) == 0)  
+        if(pos[2] < 9 && grid[pos[1]][pos[2] + 1].returnPosVal() != 0)  
         pos[2]++; 
     }
     void moveUp() {
         strncpy(room_current, grid[pos[1]][pos[2]].returnRoomVal(), 20);
         strncpy(room_next, grid[pos[1]-1][pos[2]].returnRoomVal(), 20);
-        if(pos[1] > 0 && grid[pos[1]-1][pos[2]].returnPosVal() != 0 && strcmp(room_current, room_next) == 0)  
+        if(pos[1] > 0 && grid[pos[1]-1][pos[2]].returnPosVal() != 0)  
         pos[1]--; 
     }
     void moveDown() {
         strncpy(room_current, grid[pos[1]][pos[2]].returnRoomVal(), 20);
         strncpy(room_next, grid[pos[1]+1][pos[2]].returnRoomVal(), 20);
-        if(pos[1] < 6 && grid[pos[1]+1][pos[2]].returnPosVal() != 0 && strcmp(room_current, room_next) == 0)  
+        if(pos[1] < 6 && grid[pos[1]+1][pos[2]].returnPosVal() != 0)  
             pos[1]++; 
     }
     void checkRoom(int x, int y) {
@@ -124,6 +127,7 @@ void loadlevel(int x) {
                 col = temp.returnCol();
                 pos = temp.returnPosVal();
                 grid[row][col].setPosVal(pos);
+                grid[row][col].setRoomVal(temp.returnRoomVal());
             }
             fin.read((char *)&temp, sizeof(temp));
         }
