@@ -9,7 +9,7 @@ void character::checkSurroundings(int x) {
         for(int i = -1; i < 2; i++){
                 for(int j = -1; j < 2; j++) {
                         if(i == 0 && j == 0) {
-                                mvprintw((x-5)+i, (1+j)*15, "| You are here ");        
+                                mvprintw((x-5)+i, (1+j)*15, "|*%s* ",grid[row+i][col+j].returnRoomVal());        
                         } else {
                                 if(row+i < 0 || col+j < 0 || row+i > 6 || col+j > 9) {
                                         mvprintw((x-5)+i, (1+j)*15, "| ");        

@@ -28,35 +28,35 @@
 #include "look.h"
 #include "move.h"
 using namespace std;
-int row, col;
+int row, col, ch;
 int main() {
-    loadlevel(2);
+    loadlevel(0);
     character user(0,0,0,1);
-    int ch;
     initscr();
     cbreak();
+    noecho();
     keypad(stdscr, true);
     getmaxyx(stdscr, row, col);
     intro(row, col);
     loadScreen(user.returnCol(), user.returnRow());
     do {
         ch = getch();
-        if(ch == KEY_LEFT) {
+        if(ch == KEY_LEFT || ch == 'h') {
             clear();
             user.moveLeft(col,row);
             loadScreen(user.returnCol(), user.returnRow());
             refresh();
-        } else if (ch == KEY_RIGHT) {
+        } else if (ch == KEY_RIGHT || ch == 'l') {
             clear();
             user.moveRight(col,row);
             loadScreen(user.returnCol(), user.returnRow());
             refresh();
-        } else if (ch == KEY_UP) {
+        } else if (ch == KEY_UP || ch == 'k') {
             clear();
             user.moveUp(col,row);
             loadScreen(user.returnCol(), user.returnRow());
             refresh();
-        } else if(ch == KEY_DOWN) {
+        } else if(ch == KEY_DOWN || ch == 'j') {
             clear();
             user.moveDown(col, row);
             loadScreen(user.returnCol(), user.returnRow());
@@ -71,13 +71,13 @@ int main() {
             user.stairDown(user.returnCol(), user.returnRow());
             loadScreen(user.returnCol(), user.returnRow());
             refresh();
-        } else if(ch == ' ') {
+        } else if(ch == 'c') {
             clear();
             user.checkRoom(row);
             loadScreen(user.returnCol(), user.returnRow());
             mvprintw(row-6, 0, "CHECK CURRENT ROOM");
             refresh();
-        } else if(ch == 'c') {
+        } else if(ch == ' ') {
             clear();
             user.checkSurroundings(row);
             loadScreen(user.returnCol(), user.returnRow());

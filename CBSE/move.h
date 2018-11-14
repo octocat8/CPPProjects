@@ -86,7 +86,8 @@ void character::stairUp(int x, int y) {
             ++pos[0];
             setLocation(pos[0], x, y);
             mvprintw(y-2, 0, "Floor Changed to %i", pos[0]);
-        } else {
+        } 
+        else {
             mvprintw(y-2, 0, "MOVE TO STAIRCASE/LIFT AND TRY AGAIN");
         }
     }
