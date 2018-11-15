@@ -55,86 +55,86 @@ class space{
         strncpy(room_name, z, 20);
     }
 } temp, grid[7][10];
-class character {
-    int pos[3];
-    int type;
-    char room_current[20];
-    char room_next[20];
-    public:
-    character(int a, int b, int c, int d) {
-        pos[0] = a;
-        pos[1] = b;
-        pos[2] = c;
-        type = d;
-        strncpy(room_current, grid[b][c].returnRoomVal(), 20);
-    }
-    int returnRow() { return pos[1]; }
-    int returnCol() { return pos[2]; }
-    void moveLeft(int x, int y);
-    void moveRight(int x, int y);
-    void moveUp(int x, int y);
-    void moveDown(int x, int y);
-    void checkRoom(int x);
-    void stairUp(int x, int y);
-    void stairDown(int x, int y);
-    void checkSurroundings(int x);
-    void setLocation(int x, int y, int z) {
-        pos[0] = x;
-        pos[1] = y;
-        pos[2] = z;
-    }
-};
-void intro(int x, int y) {
-    char const *intro[] = {
-        "ARCADIA",
-        "Game created and designed by Lael John",
-        "To move, use the arrow keys",
-        "To check the room, press <space>",
-        "To check your surroundings, press c",
-        "To exit, press x",
-        "On the screen, . represents your current position",
-        "Good Luck!"
-    };
-    for(int i = 0; i < 7; i++) {
-        mvprintw(x/2, (y- strlen(intro[i]))/2, "%s", intro[i]);
-        refresh();
-        getch();
-        clear();
-    }
-}
-void loadlevel(int x) {
-    ifstream fin;
-    fin.open("layout.dat", ios::in | ios::binary);
-    if(fin) {
-    fin.read((char *)&temp, sizeof(temp));
-        while(!fin.eof()) {
-            if(temp.returnLevel() == x) {
-                int row, col, pos;
-                row = temp.returnRow();
-                col = temp.returnCol();
-                pos = temp.returnSpaceVal();
-                grid[row][col].setPosVal(pos);
-                grid[row][col].setRoomVal(temp.returnRoomVal());
-            }
-            fin.read((char *)&temp, sizeof(temp));
-        }
-    fin.close();
-    } else {
-        cout<<"Unable to open file;";
-    }
-}
-void loadScreen(int x, int y) {
-    for(int i = 0; i < 7; i++){
-        for(int j = 0; j < 10; j++) {
-            if(y == i && x == j) {
-                mvprintw(5 + i, 5+ (3*j), " ^ ");
-            } else if(grid[i][j].returnSpaceVal() == 0){
-                mvprintw(5 + i, 5+ (3*j), "|X|");
-            } else if(grid[i][j].returnSpaceVal() == 1){
-                mvprintw(5 + i, 5+ (3*j), "   ");
-            } else {
-                mvprintw(5 + i, 5+ (3*j), "|O|");
-            }
-        }
-    }
-}
+// class character {
+//     int pos[3];
+//     int type;
+//     char room_current[20];
+//     char room_next[20];
+//     public:
+//     character(int a, int b, int c, int d) {
+//         pos[0] = a;
+//         pos[1] = b;
+//         pos[2] = c;
+//         type = d;
+//         strncpy(room_current, grid[b][c].returnRoomVal(), 20);
+//     }
+//     int returnRow() { return pos[1]; }
+//     int returnCol() { return pos[2]; }
+//     void moveLeft(int x, int y);
+//     void moveRight(int x, int y);
+//     void moveUp(int x, int y);
+//     void moveDown(int x, int y);
+//     void checkRoom(int x);
+//     void stairUp(int x, int y);
+//     void stairDown(int x, int y);
+//     void checkSurroundings(int x);
+//     void setLocation(int x, int y, int z) {
+//         pos[0] = x;
+//         pos[1] = y;
+//         pos[2] = z;
+//     }
+// };
+// void intro(int x, int y) {
+//     char const *intro[] = {
+//         "ARCADIA",
+//         "Game created and designed by Lael John",
+//         "To move, use the arrow keys",
+//         "To check the room, press <space>",
+//         "To check your surroundings, press c",
+//         "To exit, press x",
+//         "On the screen, . represents your current position",
+//         "Good Luck!"
+//     };
+//     for(int i = 0; i < 7; i++) {
+//         mvprintw(x/2, (y- strlen(intro[i]))/2, "%s", intro[i]);
+//         refresh();
+//         getch();
+//         clear();
+//     }
+// }
+// void loadlevel(int x) {
+//     ifstream fin;
+//     fin.open("layout.dat", ios::in | ios::binary);
+//     if(fin) {
+//     fin.read((char *)&temp, sizeof(temp));
+//         while(!fin.eof()) {
+//             if(temp.returnLevel() == x) {
+//                 int row, col, pos;
+//                 row = temp.returnRow();
+//                 col = temp.returnCol();
+//                 pos = temp.returnSpaceVal();
+//                 grid[row][col].setPosVal(pos);
+//                 grid[row][col].setRoomVal(temp.returnRoomVal());
+//             }
+//             fin.read((char *)&temp, sizeof(temp));
+//         }
+//     fin.close();
+//     } else {
+//         cout<<"Unable to open file;";
+//     }
+// }
+// void loadScreen(int x, int y) {
+//     for(int i = 0; i < 7; i++){
+//         for(int j = 0; j < 10; j++) {
+//             if(y == i && x == j) {
+//                 mvprintw(5 + i, 5+ (3*j), " ^ ");
+//             } else if(grid[i][j].returnSpaceVal() == 0){
+//                 mvprintw(5 + i, 5+ (3*j), "|X|");
+//             } else if(grid[i][j].returnSpaceVal() == 1){
+//                 mvprintw(5 + i, 5+ (3*j), "   ");
+//             } else {
+//                 mvprintw(5 + i, 5+ (3*j), "|O|");
+//             }
+//         }
+//     }
+// }

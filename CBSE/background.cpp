@@ -4,8 +4,8 @@
 #include "create.h"
 using namespace std;
 int main() {
-    ofstream fout;  
-    fout.open("layout.dat", ios::out);
+    fstream file;  
+    file.open("layout.dat", ios::out);
     if(fout) {
         for(int i = 0; i < 5; i++) {
             for(int j = 0; j < 7; j++) {
