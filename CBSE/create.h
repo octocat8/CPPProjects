@@ -54,6 +54,13 @@ class space{
     void setRoomVal( char const* z) {
         strncpy(room_name, z, 20);
     }
+    void setObjVal(int a, int b, int c, int d, char const* e) {
+        pos[0] = a;
+        pos[1] = b;
+        pos[2] = c;
+        posval = d;
+        strncpy(room_name, e, 20);
+    }
 } temp, grid[7][10];
 class character {
     int pos[3];
