@@ -76,7 +76,7 @@ void character::moveDown(int x, int y) {
     }
 }
 
-void character::stairUp(int x, int y) {
+void character::Up(int x, int y) {
     if(pos[0] == 4) {
         mvprintw(2, 0, "NO FLOORS ABOVE");
     } else {
@@ -86,14 +86,27 @@ void character::stairUp(int x, int y) {
             ++pos[0];
             setLocation(pos[0], y, x);
             mvprintw(2, 0, "Floor Changed to %i", pos[0]);
-        } 
-        else {
+        } else if(grid[y][x].returnSpaceVal() == 3) {
+            int floor;
+            clear();
+            mvprintw(2, 0, "Which floor do you want to go to: ");
+            floor = getch();
+            if(floor >= char(48 + pos[0]) && floor <= '4') {
+                clear();
+                loadlevel(floor-48);
+                setLocation(floor-48, y, x);
+                mvprintw(2, 0, "Floor Changed to %i", pos[0]);
+                refresh();
+            } else {
+                mvprintw(2, 0, "LIFT CAN ONLY MOVE UP TO 4");
+            }
+        } else {
             mvprintw(2, 0, "MOVE TO STAIRCASE/LIFT AND TRY AGAIN");
         }
     }
 }
 
-void character::stairDown(int x, int y) {
+void character::Down(int x, int y) {
     if(pos[0] == 0) {
         mvprintw(2, 0, "NO FLOORS BELOW");
     } else {
@@ -103,6 +116,20 @@ void character::stairDown(int x, int y) {
             --pos[0];
             setLocation(pos[0], y, x);
             mvprintw(2, 0, "Floor Changed to %i", pos[0]);
+        } else if(grid[y][x].returnSpaceVal() == 3) {
+            int floor;
+            clear();
+            mvprintw(2, 0, "Which floor do you want to go to: ");
+            floor = getch();
+            if(floor >= '0' && floor <= char(48 + pos[0])) {
+                clear();
+                loadlevel(floor - 48);
+                setLocation(floor -48, y, x);
+                mvprintw(2, 0, "Floor Changed to %i", pos[0]);
+                refresh();
+            } else {
+                mvprintw(2, 0, "LIFT CAN ONLY GO DOWN, UPTO 0");
+            }
         } else {
             mvprintw(2, 0, "MOVE TO STAIRCASE/LIFT AND TRY AGAIN");
         }

@@ -82,8 +82,8 @@ class character {
     void moveUp(int x, int y);
     void moveDown(int x, int y);
     void checkRoom(int x);
-    void stairUp(int x, int y);
-    void stairDown(int x, int y);
+    void Up(int x, int y);
+    void Down(int x, int y);
     void checkSurroundings(int x);
     void setLocation(int z, int y, int x) {
         pos[0] = z;
