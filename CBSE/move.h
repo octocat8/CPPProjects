@@ -78,33 +78,33 @@ void character::moveDown(int x, int y) {
 
 void character::stairUp(int x, int y) {
     if(pos[0] == 4) {
-        mvprintw(y-2, 0, "NO FLOORS ABOVE");
+        mvprintw(2, 0, "NO FLOORS ABOVE");
     } else {
-        if(grid[x][y].returnSpaceVal() == 2) {
+        if(grid[y][x].returnSpaceVal() == 2) {
             clear();
             loadlevel(pos[0]+1);
             ++pos[0];
-            setLocation(pos[0], x, y);
-            mvprintw(y-2, 0, "Floor Changed to %i", pos[0]);
+            setLocation(pos[0], y, x);
+            mvprintw(2, 0, "Floor Changed to %i", pos[0]);
         } 
         else {
-            mvprintw(y-2, 0, "MOVE TO STAIRCASE/LIFT AND TRY AGAIN");
+            mvprintw(2, 0, "MOVE TO STAIRCASE/LIFT AND TRY AGAIN");
         }
     }
 }
 
 void character::stairDown(int x, int y) {
     if(pos[0] == 0) {
-        mvprintw(y-2, 0, "NO FLOORS BELOW");
+        mvprintw(2, 0, "NO FLOORS BELOW");
     } else {
-        if(grid[x][y].returnSpaceVal() == 2) {
+        if(grid[y][x].returnSpaceVal() == 2) {
             clear();
             loadlevel(pos[0]-1);
             --pos[0];
-            setLocation(pos[0], x, y);
-            mvprintw(y-2, 0, "Floor Changed to %i", pos[0]);
+            setLocation(pos[0], y, x);
+            mvprintw(2, 0, "Floor Changed to %i", pos[0]);
         } else {
-            mvprintw(y-2, 0, "MOVE TO STAIRCASE/LIFT AND TRY AGAIN");
+            mvprintw(2, 0, "MOVE TO STAIRCASE/LIFT AND TRY AGAIN");
         }
     }
 }

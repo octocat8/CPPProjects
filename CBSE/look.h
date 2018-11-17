@@ -1,6 +1,6 @@
 using namespace std;
 void character::checkRoom(int x) {
-        mvprintw(x - 4, 0, "You are located at ( %i , %i )\n\nThe space you are currently in is %s", pos[1], pos[2], room_current);
+        mvprintw(x - 4, 0, "You are located at ( %i , %i )\n\nThe space you are currently in is %i", pos[1], pos[2], grid[pos[1]][pos[2]].returnSpaceVal());
 }
 void character::checkSurroundings(int x) {
         int row, col;
