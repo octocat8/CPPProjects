@@ -93,16 +93,17 @@ class character {
 };
 void intro(int x, int y) {
     char const *intro[] = {
-        "ARCADIA",
-        "Game created and designed by Lael John",
+        "SIMUTEXT",
+        "Simulation software created and designed by Lael John",
+        "Users can use this to explore the structure of a school",
         "To move, use the arrow keys",
-        "To check the room, press <space>",
-        "To check your surroundings, press c",
-        "To exit, press x",
-        "On the screen, . represents your current position",
-        "Good Luck!"
+        "To check the room, press c",
+        "To check your surroundings, press <space>",
+        "To change floors, move to either the staircases or the lift, and press either u or d",
+        "On the screen, ^ represents your current position",
+        "To exit, press x"
     };
-    for(int i = 0; i < 7; i++) {
+    for(int i = 0; i < 9; i++) {
         mvprintw(x/2, (y- strlen(intro[i]))/2, "%s", intro[i]);
         refresh();
         getch();

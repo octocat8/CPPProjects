@@ -1,10 +1,43 @@
 #include <fstream>
 #include <iostream>
 #include <string.h>
-#include "create.h"
+#include <stdio.h>
 using namespace std;
+class space{
+    int pos[3]; 
+    int posval;
+    char room_name[20];
+    public:
+    void putSpaceVal() {
+        cout<<pos[0]<<" "<<pos[1]<<" "<<pos[2]<<" "<<posval<<" "<<room_name<<endl;
+    }
+    int returnLevel() {
+        return pos[0];
+    }
+    int returnRow() {
+        return pos[1];
+    }
+    int returnCol() {
+        return pos[2];
+    }
+    int returnSpaceVal() {
+        return posval;
+    }
+    char const* returnRoomVal() {
+        return room_name;
+    }
+    void setPosVal(int z) {
+        posval = z;
+    }
+    void setObjVal(int a, int b, int c, int d, char const* e) {
+        pos[0] = a;
+        pos[1] = b;
+        pos[2] = c;
+        posval = d;
+        strncpy(room_name, e, 20);
+    }
+}temp, temp2;
 int main() {
-    space temp2;
     char ch; long pos;
     ifstream fin("layout.dat", ios::in);
     ofstream fout("school.dat", ios::out | ios::binary);
@@ -46,4 +79,7 @@ int main() {
     }
     fin.close();
     fout.close();
+    remove("layout.dat");
+    rename("school.dat","layout.dat");
+    return 0;
 }
