@@ -64,15 +64,13 @@ class space{
 } temp, grid[7][10];
 class character {
     int pos[3];
-    int type;
     char room_current[20];
     char room_next[20];
     public:
-    character(int a, int b, int c, int d) {
+    character(int a, int b, int c) {
         pos[0] = a;
         pos[1] = b;
         pos[2] = c;
-        type = d;
         strncpy(room_current, grid[b][c].returnRoomVal(), 20);
     }
     int returnRow() { return pos[1]; }

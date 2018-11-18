@@ -9,7 +9,7 @@ using namespace std;
 int row, col, ch;
 int main() {
     loadlevel(0);
-    character user(0,0,0,1);
+    character user(0,0,0);
     initscr();
     cbreak();
     noecho();
